@@ -6,37 +6,32 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/users/:user',
+      path: '/:user',
       name: 'users.show',
       component: () => import('@/views/user/Show.vue'),
     },
     {
-      path: '/projects',
-      name: 'projects.index',
-      component: () => import('@/views/project/Index.vue'),
-    },
-    {
-      path: '/projects/:project',
+      path: '/:user/:project',
       name: 'projects.show',
       component: () => import('@/views/project/Show.vue'),
     },
     {
-      path: '/projects/:project/endpoints',
+      path: '/:user/:project/endpoints',
       name: 'endpoints.index',
       component: () => import('@/views/endpoint/Index.vue'),
     },
     {
-      path: '/projects/:project/endpoints/:endpoint',
+      path: '/:user/:project/endpoints/:endpoint',
       name: 'endpoints.show',
       component: () => import('@/views/endpoint/Show.vue'),
     },
     {
-      path: '/projects/:project/environments',
+      path: '/:user/:project/environments',
       name: 'environments.index',
       component: () => import('@/views/environment/Index.vue'),
     },
     {
-      path: '/projects/:project/environments/:environment',
+      path: '/:user/:project/environments/:environment',
       name: 'environments.show',
       component: () => import('@/views/environment/Show.vue'),
     },

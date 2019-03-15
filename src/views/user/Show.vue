@@ -5,26 +5,41 @@
       wrap
     >
       <v-flex
-        md3
-        xs12
+        md2
       >
         User Show
       </v-flex>
 
       <v-flex
-        md9
-        xs12
+        md10
       >
-        <router-view />
+        <component
+          :is="tab"
+        />
       </v-flex>
     </v-layout>
   </div>
 </template>
 
 <script>
+import UserProjects from '@/components/User/UserProjects.vue';
 
 export default {
   components: {
+    UserProjects,
+  },
+  data() {
+    return {
+      tabs: [
+        'projects',
+      ],
+    };
+  },
+  computed: {
+    tab() {
+      const { tab } = this.$route.query;
+      return this.tabs.includes(tab) ? `User${tab.charAt(0).toUpperCase()}${tab.slice(1)}` : 'UserProjects';
+    },
   },
 };
 </script>

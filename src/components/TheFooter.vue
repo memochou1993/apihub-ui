@@ -7,21 +7,9 @@
         class="flex primary lighten-1 white--text text-xs-center"
       >
         <v-card-text>
-          &copy; 2019 None
+          &copy; 2019 ApiHub
         </v-card-text>
       </v-card>
     </v-footer>
   </div>
 </template>
-
-<script>
-export default {
-  data: () => ({
-    icons: [
-      'fab fa-facebook',
-      'fab fa-youtube',
-      'fab fa-github',
-    ],
-  }),
-};
-</script>
