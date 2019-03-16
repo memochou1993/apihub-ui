@@ -49,7 +49,7 @@
               class="text-xs-left"
             >
               <v-menu
-                offset-y
+                offset-x
                 transition="scale-transition"
               >
                 <template
@@ -67,11 +67,14 @@
                   dense
                 >
                   <v-list-tile
-                    v-for="(action, i) in actions"
-                    :key="i"
-                    @click="goDachboard()"
+                    @click="viewProject(props.item.id)"
                   >
-                    <v-list-tile-title>{{ action.title }}</v-list-tile-title>
+                    <v-list-tile-title>View</v-list-tile-title>
+                  </v-list-tile>
+                  <v-list-tile
+                    @click="editProject(props.item.id)"
+                  >
+                    <v-list-tile-title>Edit</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
               </v-menu>
@@ -107,8 +110,7 @@
 export default {
   data() {
     return {
-      loading: true,
-      noData: false,
+      projects: [],
       headers: [
         {
           text: 'ID', value: 'id', align: 'right', sortable: false,
@@ -132,16 +134,17 @@ export default {
           text: '', value: '', sortable: false,
         },
       ],
+      loading: true,
+      noData: false,
       paginate: 15,
       page: 1,
       pages: 1,
-      projects: [],
-      actions: [
-        {
-          title: 'Dashboard',
-        },
-      ],
     };
+  },
+  computed: {
+    user() {
+      return this.$route.params.user;
+    },
   },
   created() {
     this.fetchProjects();
@@ -167,13 +170,25 @@ export default {
         })
         .catch((error) => {
           this.noData = true;
-          console.error(error);
+          console.debug(error);
         })
         .then(() => {
           setTimeout(() => {
             this.loading = false;
           }, 1000);
         });
+    },
+    viewProject(id) {
+      this.$router.push({
+        name: 'projects.show',
+        params: {
+          user: this.user,
+          project: id,
+        },
+      });
+    },
+    editProject(id) {
+      //
     },
   },
 };

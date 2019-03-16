@@ -13,6 +13,7 @@
       <v-flex
         md10
       >
+        <UserTab />
         <component
           :is="tab"
         />
@@ -22,11 +23,13 @@
 </template>
 
 <script>
-import UserProjects from '@/components/User/UserProjects.vue';
+import UserTab from '@/components/User/UserTab.vue';
+import TabProjects from '@/components/User/TabProjects.vue';
 
 export default {
   components: {
-    UserProjects,
+    UserTab,
+    TabProjects,
   },
   data() {
     return {
@@ -38,7 +41,7 @@ export default {
   computed: {
     tab() {
       const { tab } = this.$route.query;
-      return this.tabs.includes(tab) ? `User${tab.charAt(0).toUpperCase()}${tab.slice(1)}` : 'UserProjects';
+      return this.tabs.includes(tab) ? `Tab${tab.charAt(0).toUpperCase()}${tab.slice(1)}` : 'TabProjects';
     },
   },
 };
