@@ -11,6 +11,17 @@
       >
         ApiHub
       </v-toolbar-title>
+      <v-spacer />
+      <v-btn
+        icon
+      >
+        <v-icon>home</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+      >
+        <v-icon>apps</v-icon>
+      </v-btn>
     </v-toolbar>
   </div>
 </template>

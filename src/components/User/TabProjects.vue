@@ -110,7 +110,6 @@
 export default {
   data() {
     return {
-      projects: [],
       headers: [
         {
           text: 'ID', value: 'id', align: 'right', sortable: false,
@@ -145,6 +144,9 @@ export default {
     user() {
       return this.$route.params.user;
     },
+    projects() {
+      return this.$store.state.projects;
+    },
   },
   created() {
     this.fetchProjects();
@@ -155,8 +157,7 @@ export default {
     },
     fetchProjects() {
       this.loading = true;
-      this.axios({
-        method: 'GET',
+      this.$store.dispatch('fetchProjects', {
         url: '/users/me/projects',
         params: {
           paginate: this.paginate,
@@ -164,13 +165,8 @@ export default {
           diffForHumans: true,
         },
       })
-        .then(({ data }) => {
-          this.projects = data.data;
-          this.pages = data.meta.last_page;
-        })
-        .catch((error) => {
+        .catch(() => {
           this.noData = true;
-          console.debug(error);
         })
         .then(() => {
           setTimeout(() => {
@@ -188,7 +184,7 @@ export default {
       });
     },
     editProject(id) {
-      //
+      console.log(id);
     },
   },
 };

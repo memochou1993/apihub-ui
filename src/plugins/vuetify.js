@@ -8,7 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 Vue.use(Vuetify, {
   theme: {
     primary: colors.indigo,
-    secondary: '#424242',
+    secondary: colors.grey,
     accent: '#82B1FF',
     error: '#FF5252',
     info: colors.orange,

@@ -5,8 +5,8 @@
       class="elevation-1"
     >
       <v-tab
-        v-for="(tab, i) in tabs"
-        :key="i"
+        v-for="(tab, index) in tabs"
+        :key="index"
         :to="tab.to"
       >
         {{ tab.title }}

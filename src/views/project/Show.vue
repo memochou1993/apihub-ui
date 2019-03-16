@@ -26,5 +26,32 @@
 export default {
   components: {
   },
+  computed: {
+    project() {
+      return this.$route.params.project;
+    },
+  },
+  created() {
+    this.fetchProject();
+  },
+  methods: {
+    fetchProject() {
+      this.loading = true;
+      this.$store.dispatch('fetchProject', {
+        url: `/users/me/projects/${this.project}`,
+        params: {
+          diffForHumans: true,
+        },
+      })
+        .catch(() => {
+          this.noData = true;
+        })
+        .then(() => {
+          setTimeout(() => {
+            this.loading = false;
+          }, 1000);
+        });
+    },
+  },
 };
 </script>

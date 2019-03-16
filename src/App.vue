@@ -33,10 +33,10 @@ export default {
     TheDrawer,
     TheFooter,
   },
-  data() {
-    return {
-      project: 0,
-    };
+  computed: {
+    project() {
+      return this.$route.params.project;
+    },
   },
 };
 </script>

@@ -1,32 +1,41 @@
 <template>
   <div>
     <v-navigation-drawer
-      v-model="drawer"
       app
-      left
       clipped
-      disable-resize-watcher
+      permanent
+      width="250"
     >
-      <v-list>
-        <v-list-tile
+      <v-list
+        dense
+      >
+        <template
           v-for="(link, index) in links"
-          :key="index"
-          :to="link.to"
-          exact
         >
-          <v-list-tile-action>
-            <v-icon>
-              {{ link.icon }}
-            </v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content
-            class="subheading"
+          <v-list-tile
+            :key="index"
+            :to="link.to"
+            active-class="secondary lighten-4 primary--text"
+            exact
           >
-            <v-list-tile-title>
-              {{ link.title }}
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+            <v-list-tile-action>
+              <v-icon>
+                {{ link.icon }}
+              </v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content
+              class="subheading"
+            >
+              <v-list-tile-title>
+                {{ link.title }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider
+            v-if="index + 1 < links.length"
+            :key="`${index}-divider`"
+          />
+        </template>
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -34,10 +43,26 @@
 
 <script>
 export default {
-  data() {
-    return {
-      drawer: true,
-      links: [
+  computed: {
+    user() {
+      return this.$route.params.user;
+    },
+    project() {
+      return this.$route.params.project;
+    },
+    links() {
+      return [
+        {
+          title: 'Overview',
+          to: {
+            name: 'projects.show',
+            params: {
+              user: this.user,
+              project: this.project,
+            },
+          },
+          icon: 'dashboard',
+        },
         {
           title: 'Endpoints',
           to: {
@@ -46,14 +71,10 @@ export default {
               endpoint: 1,
             },
           },
-          icon: 'fa-project-diagram',
+          icon: 'description',
         },
-      ],
-      projects: [
-        'First',
-        'Second',
-      ],
-    };
+      ];
+    },
   },
 };
 </script>
