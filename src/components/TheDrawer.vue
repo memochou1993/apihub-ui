@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div
+    v-if="project"
+  >
     <v-navigation-drawer
       app
       clipped

@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div
+    v-if="! project"
+  >
     <v-footer
       height="auto"
     >
@@ -13,3 +15,13 @@
     </v-footer>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    project() {
+      return this.$route.params.project;
+    },
+  },
+};
+</script>

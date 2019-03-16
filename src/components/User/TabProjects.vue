@@ -57,7 +57,7 @@
                 >
                   <v-btn
                     icon
-                    color="info lighten-2"
+                    color="accent lighten-2"
                     v-on="on"
                   >
                     <v-icon>more_horiz</v-icon>

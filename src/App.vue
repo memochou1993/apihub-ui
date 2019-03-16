@@ -4,9 +4,7 @@
   >
     <v-app>
       <TheToolbar />
-      <TheDrawer
-        v-if="project"
-      />
+      <TheDrawer />
       <v-content>
         <v-container
           grid-list-xl
@@ -14,9 +12,7 @@
           <router-view />
         </v-container>
       </v-content>
-      <TheFooter
-        v-if="! project"
-      />
+      <TheFooter />
     </v-app>
   </div>
 </template>
@@ -32,11 +28,6 @@ export default {
     TheToolbar,
     TheDrawer,
     TheFooter,
-  },
-  computed: {
-    project() {
-      return this.$route.params.project;
-    },
   },
 };
 </script>

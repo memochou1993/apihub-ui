@@ -9,9 +9,9 @@ Vue.use(Vuetify, {
   theme: {
     primary: colors.indigo,
     secondary: colors.grey,
-    accent: '#82B1FF',
+    accent: colors.orange,
     error: '#FF5252',
-    info: colors.orange,
+    info: '#82B1FF',
     success: '#4CAF50',
     warning: '#FFC107',
   },

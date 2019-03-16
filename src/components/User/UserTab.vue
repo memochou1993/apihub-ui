@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-tabs
-      slider-color="info lighten-2"
+      slider-color="accent lighten-2"
       class="elevation-1"
     >
       <v-tab
