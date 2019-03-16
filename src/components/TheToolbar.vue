@@ -13,18 +13,19 @@
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items
-        v-if="user"
+        v-if="params.user"
       >
         <v-btn
-          v-for="(link, index) in links"
-          :key="index"
-          :to="link.to"
           icon
-          exact
+          @click="goProjects()"
         >
-          <v-icon>
-            {{ link.icon }}
-          </v-icon>
+          <v-icon>apps</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          @click="refresh()"
+        >
+          <v-icon>refresh</v-icon>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -34,24 +35,24 @@
 <script>
 export default {
   computed: {
-    user() {
-      return this.$route.params.user || 0;
+    params() {
+      return this.$route.params;
     },
-    links() {
-      return [
-        {
-          icon: 'apps',
-          to: {
-            name: 'users.show',
-            params: {
-              user: this.user,
-            },
-            query: {
-              tab: 'projects',
-            },
-          },
+  },
+  methods: {
+    goProjects() {
+      this.$router.push({
+        name: 'users.show',
+        params: {
+          user: this.params.user,
         },
-      ];
+        query: {
+          tab: 'projects',
+        },
+      });
+    },
+    refresh() {
+      //
     },
   },
 };

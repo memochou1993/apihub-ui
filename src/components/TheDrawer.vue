@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="project"
+    v-if="params.project"
   >
     <v-navigation-drawer
       app
@@ -46,11 +46,8 @@
 <script>
 export default {
   computed: {
-    user() {
-      return this.$route.params.user;
-    },
-    project() {
-      return this.$route.params.project;
+    params() {
+      return this.$route.params;
     },
     links() {
       return [
@@ -59,8 +56,8 @@ export default {
           to: {
             name: 'projects.show',
             params: {
-              user: this.user,
-              project: this.project,
+              user: this.params.user,
+              project: this.params.project,
             },
           },
           icon: 'dashboard',

@@ -1,13 +1,15 @@
 <template>
   <div>
     <v-tabs
-      slider-color="accent lighten-2"
-      class="elevation-1"
+      color="secondary lighten-5"
+      slider-color="primary lighten-2"
+      align-with-title
+      class="elevation-1 mb-3"
     >
       <v-tab
         v-for="(tab, index) in tabs"
         :key="index"
-        :to="tab.to"
+        @click="onChangeTab(tab.to)"
       >
         {{ tab.title }}
       </v-tab>
@@ -18,8 +20,8 @@
 <script>
 export default {
   computed: {
-    user() {
-      return this.$route.params.user;
+    params() {
+      return this.$route.params;
     },
     tabs() {
       return [
@@ -28,14 +30,19 @@ export default {
           to: {
             name: 'users.show',
             params: {
-              user: this.user,
+              user: this.params.user,
             },
             query: {
-              tab: 'projetcs',
+              tab: 'test',
             },
           },
         },
       ];
+    },
+  },
+  methods: {
+    onChangeTab(to) {
+      this.$router.push(to);
     },
   },
 };

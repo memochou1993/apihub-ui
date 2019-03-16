@@ -10,13 +10,13 @@
           :items="projects"
           :headers="headers"
           :loading="loading"
-          class="elevation-1"
+          class="elevation-3"
         >
           <template
             v-slot:items="props"
           >
             <td
-              class="text-xs-right"
+              class="text-xs-center"
             >
               {{ props.item.id }}
             </td>
@@ -24,16 +24,6 @@
               class="text-xs-left"
             >
               {{ props.item.name }}
-            </td>
-            <td
-              class="text-xs-left"
-            >
-              {{ props.item.description }}
-            </td>
-            <td
-              class="text-xs-left"
-            >
-              {{ props.item.private }}
             </td>
             <td
               class="text-xs-left"
@@ -46,38 +36,34 @@
               {{ props.item.updated_at }}
             </td>
             <td
-              class="text-xs-left"
+              class="text-xs-center"
             >
-              <v-menu
-                offset-x
-                transition="scale-transition"
+              <v-icon
+                v-if="props.item.private"
+                color="warning"
               >
-                <template
-                  v-slot:activator="{ on }"
+                lock
+              </v-icon>
+              <v-icon
+                v-else
+                color="warning"
+              >
+                lock_open
+              </v-icon>
+            </td>
+            <td
+              class="text-xs-center"
+            >
+              <v-btn
+                icon
+                @click="viewProject(props.item.id)"
+              >
+                <v-icon
+                  color="success"
                 >
-                  <v-btn
-                    icon
-                    color="accent lighten-2"
-                    v-on="on"
-                  >
-                    <v-icon>more_horiz</v-icon>
-                  </v-btn>
-                </template>
-                <v-list
-                  dense
-                >
-                  <v-list-tile
-                    @click="viewProject(props.item.id)"
-                  >
-                    <v-list-tile-title>View</v-list-tile-title>
-                  </v-list-tile>
-                  <v-list-tile
-                    @click="editProject(props.item.id)"
-                  >
-                    <v-list-tile-title>Edit</v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
+                  dashboard
+                </v-icon>
+              </v-btn>
             </td>
           </template>
           <template
@@ -112,25 +98,22 @@ export default {
     return {
       headers: [
         {
-          text: 'ID', value: 'id', align: 'right', sortable: false,
+          text: 'ID', value: 'id', align: 'center', sortable: false,
         },
         {
-          text: 'Name', value: 'name', sortable: false,
+          text: 'Name', value: 'name', align: 'left', sortable: false,
         },
         {
-          text: 'Description', value: 'description', sortable: false,
+          text: 'Created at', value: 'created_at', align: 'left', sortable: false,
         },
         {
-          text: 'Private', value: 'private', sortable: false,
+          text: 'Updated at', value: 'updated_at', align: 'left', sortable: false,
         },
         {
-          text: 'Created at', value: 'created_at', sortable: false,
+          text: 'Private', value: 'private', align: 'center', sortable: false,
         },
         {
-          text: 'Updated at', value: 'updated_at', sortable: false,
-        },
-        {
-          text: '', value: '', sortable: false,
+          text: 'Dashboard', value: '', align: 'center', sortable: false,
         },
       ],
       loading: true,
@@ -171,7 +154,7 @@ export default {
         .then(() => {
           setTimeout(() => {
             this.loading = false;
-          }, 1000);
+          }, 750);
         });
     },
     viewProject(id) {
