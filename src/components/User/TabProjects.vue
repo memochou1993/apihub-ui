@@ -5,11 +5,11 @@
       wrap
     >
       <v-flex>
+        <AppProgress />
         <v-data-table
           hide-actions
           :items="projects"
           :headers="headers"
-          :loading="loading"
           class="elevation-3"
         >
           <template
@@ -40,13 +40,13 @@
             >
               <v-icon
                 v-if="props.item.private"
-                color="warning"
+                color="primary lighten-1"
               >
                 lock
               </v-icon>
               <v-icon
                 v-else
-                color="warning"
+                color="primary lighten-1"
               >
                 lock_open
               </v-icon>
@@ -59,7 +59,7 @@
                 @click="viewProject(props.item.id)"
               >
                 <v-icon
-                  color="success"
+                  color="primary lighten-1"
                 >
                   dashboard
                 </v-icon>
@@ -69,12 +69,7 @@
           <template
             v-slot:no-data
           >
-            <div
-              v-if="noData"
-              class="text-xs-center ma-5"
-            >
-              No records found
-            </div>
+            <AppNoData />
           </template>
         </v-data-table>
         <div
@@ -93,7 +88,14 @@
 </template>
 
 <script>
+import AppProgress from '@/components/AppProgress.vue';
+import AppNoData from '@/components/AppNoData.vue';
+
 export default {
+  components: {
+    AppProgress,
+    AppNoData,
+  },
   data() {
     return {
       headers: [
@@ -116,8 +118,6 @@ export default {
           text: 'Dashboard', value: '', align: 'center', sortable: false,
         },
       ],
-      loading: true,
-      noData: false,
       paginate: 15,
       page: 1,
       pages: 1,
@@ -139,7 +139,6 @@ export default {
       this.fetchProjects();
     },
     fetchProjects() {
-      this.loading = true;
       this.$store.dispatch('fetchProjects', {
         url: '/users/me/projects',
         params: {
@@ -147,15 +146,7 @@ export default {
           page: this.page,
           diffForHumans: true,
         },
-      })
-        .catch(() => {
-          this.noData = true;
-        })
-        .then(() => {
-          setTimeout(() => {
-            this.loading = false;
-          }, 750);
-        });
+      });
     },
     viewProject(id) {
       this.$router.push({

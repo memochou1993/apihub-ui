@@ -9,7 +9,7 @@
       <v-tab
         v-for="(tab, index) in tabs"
         :key="index"
-        @click="onChangeTab(tab.to)"
+        @click="onTabChange(tab)"
       >
         {{ tab.title }}
       </v-tab>
@@ -33,7 +33,7 @@ export default {
               user: this.params.user,
             },
             query: {
-              tab: 'test',
+              tab: 'projects',
             },
           },
         },
@@ -41,8 +41,8 @@ export default {
     },
   },
   methods: {
-    onChangeTab(to) {
-      this.$router.push(to);
+    onTabChange(tab) {
+      this.$router.push(tab.to);
     },
   },
 };

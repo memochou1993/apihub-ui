@@ -10,10 +10,18 @@ export default new Vuex.Store({
     // module,
   },
   state: {
-    project: {},
+    loading: false,
+    error: null,
+    project: null,
     projects: [],
   },
   mutations: {
+    setLoading(state, loading) {
+      state.loading = loading;
+    },
+    setError(state, error) {
+      state.error = error;
+    },
     setProject(state, project) {
       state.project = project;
     },
@@ -23,6 +31,8 @@ export default new Vuex.Store({
   },
   actions: {
     fetchProject(context, { url, params }) {
+      context.commit('setLoading', true);
+      context.commit('setError', null);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
@@ -34,11 +44,21 @@ export default new Vuex.Store({
             resolve(data);
           })
           .catch((error) => {
+            setTimeout(() => {
+              context.commit('setError', error);
+            }, 500);
             reject(error);
+          })
+          .then(() => {
+            setTimeout(() => {
+              context.commit('setLoading', false);
+            }, 1000);
           });
       });
     },
     fetchProjects(context, { url, params }) {
+      context.commit('setLoading', true);
+      context.commit('setError', null);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
@@ -50,7 +70,15 @@ export default new Vuex.Store({
             resolve(data);
           })
           .catch((error) => {
+            setTimeout(() => {
+              context.commit('setError', error);
+            }, 500);
             reject(error);
+          })
+          .then(() => {
+            setTimeout(() => {
+              context.commit('setLoading', false);
+            }, 1000);
           });
       });
     },

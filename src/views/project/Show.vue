@@ -7,35 +7,45 @@
       <v-flex
         xs12
       >
+        <AppProgress />
         <v-card
           class="pa-3"
         >
-          <v-card-title
-            primary-title
-            class="headline"
+          <div
+            v-if="!project"
           >
-            {{ project.name }}
-          </v-card-title>
-          <v-card-text
-            class="subheading"
+            <AppNoData />
+          </div>
+          <div
+            v-else
           >
-            {{ project.description }}
-          </v-card-text>
-          <v-chip
-            v-for="(user, index) in project.users"
-            :key="index"
-            color="accent lighten-2"
-            text-color="secondary darken-4"
-          >
-            <v-avatar>
-              <v-icon
-                color="white"
-              >
-                account_circle
-              </v-icon>
-            </v-avatar>
-            {{ user.name }}
-          </v-chip>
+            <v-card-title
+              primary-title
+              class="headline"
+            >
+              {{ project.name }}
+            </v-card-title>
+            <v-card-text
+              class="subheading"
+            >
+              {{ project.description }}
+            </v-card-text>
+            <v-chip
+              v-for="(user, index) in project.users"
+              :key="index"
+              color="accent lighten-2"
+              text-color="secondary darken-4"
+            >
+              <v-avatar>
+                <v-icon
+                  color="white"
+                >
+                  account_circle
+                </v-icon>
+              </v-avatar>
+              {{ user.name }}
+            </v-chip>
+          </div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -43,9 +53,13 @@
 </template>
 
 <script>
+import AppProgress from '@/components/AppProgress.vue';
+import AppNoData from '@/components/AppNoData.vue';
 
 export default {
   components: {
+    AppProgress,
+    AppNoData,
   },
   computed: {
     params() {
@@ -60,22 +74,13 @@ export default {
   },
   methods: {
     fetchProject() {
-      this.loading = true;
       this.$store.dispatch('fetchProject', {
         url: `/users/me/projects/${this.params.project}`,
         params: {
           diffForHumans: true,
           with: 'users',
         },
-      })
-        .catch(() => {
-          this.noData = true;
-        })
-        .then(() => {
-          setTimeout(() => {
-            this.loading = false;
-          }, 1000);
-        });
+      });
     },
   },
 };

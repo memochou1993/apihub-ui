@@ -17,7 +17,12 @@
       >
         <v-btn
           icon
-          @click="goProjects()"
+        >
+          <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          @click="onTabChange('projects')"
         >
           <v-icon>apps</v-icon>
         </v-btn>
@@ -40,14 +45,14 @@ export default {
     },
   },
   methods: {
-    goProjects() {
+    onTabChange(tab) {
       this.$router.push({
         name: 'users.show',
         params: {
           user: this.params.user,
         },
         query: {
-          tab: 'projects',
+          tab,
         },
       });
     },
