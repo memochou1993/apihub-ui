@@ -12,9 +12,7 @@
         ApiHub
       </v-toolbar-title>
       <v-spacer />
-      <v-toolbar-items
-        v-if="params.user"
-      >
+      <v-toolbar-items>
         <v-btn
           icon
         >
@@ -22,7 +20,8 @@
         </v-btn>
         <v-btn
           icon
-          @click="onTabChange('projects')"
+          exact
+          :to="{ name:'users.show', params: { user: 1 } }"
         >
           <v-icon>apps</v-icon>
         </v-btn>
@@ -39,23 +38,7 @@
 
 <script>
 export default {
-  computed: {
-    params() {
-      return this.$route.params;
-    },
-  },
   methods: {
-    onTabChange(tab) {
-      this.$router.push({
-        name: 'users.show',
-        params: {
-          user: this.params.user,
-        },
-        query: {
-          tab,
-        },
-      });
-    },
     refresh() {
       //
     },

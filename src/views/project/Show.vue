@@ -4,6 +4,9 @@
       row
       wrap
     >
+      <AppBreadcrumbs
+        current="Overview"
+      />
       <v-flex
         xs12
       >
@@ -55,11 +58,13 @@
 <script>
 import AppProgress from '@/components/AppProgress.vue';
 import AppNoData from '@/components/AppNoData.vue';
+import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 
 export default {
   components: {
     AppProgress,
     AppNoData,
+    AppBreadcrumbs,
   },
   computed: {
     params() {

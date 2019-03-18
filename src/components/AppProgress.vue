@@ -20,7 +20,7 @@ export default {
     },
     color() {
       return this.error ? 'error' : 'success';
-    }
+    },
   },
 };
 </script>

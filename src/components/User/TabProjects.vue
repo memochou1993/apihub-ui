@@ -39,6 +39,7 @@
               class="text-xs-center"
             >
               <v-icon
+                id="private"
                 v-if="props.item.private"
                 color="primary lighten-1"
               >
@@ -163,3 +164,8 @@ export default {
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+#private
+  cursor default
+</style>
