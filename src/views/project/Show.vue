@@ -79,8 +79,10 @@ export default {
   },
   methods: {
     fetchProject() {
+      const { auth } = { auth: { check: true } }; // Temp
+      const user = auth.check ? 'me' : this.params.user;
       this.$store.dispatch('fetchProject', {
-        url: `/users/me/projects/${this.params.project}`,
+        url: `/users/${user}/projects/${this.params.project}`,
         params: {
           diffForHumans: true,
           with: 'users',

@@ -125,8 +125,8 @@ export default {
     };
   },
   computed: {
-    user() {
-      return this.$route.params.user;
+    params() {
+      return this.$route.params;
     },
     projects() {
       return this.$store.state.projects;
@@ -140,8 +140,10 @@ export default {
       this.fetchProjects();
     },
     fetchProjects() {
+      const { auth } = { auth: { check: true } }; // Temp
+      const user = auth.check ? 'me' : this.params.user;
       this.$store.dispatch('fetchProjects', {
-        url: '/users/me/projects',
+        url: `/users/${user}/projects`,
         params: {
           paginate: this.paginate,
           page: this.page,
@@ -153,7 +155,7 @@ export default {
       this.$router.push({
         name: 'projects.show',
         params: {
-          user: this.user,
+          user: this.params.user,
           project: id,
         },
       });
