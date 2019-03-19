@@ -105,7 +105,12 @@ export default {
           diffForHumans: true,
           with: 'users',
         },
-      });
+      })
+        .catch(() => {
+          this.$router.push({
+            name: 404,
+          });
+        });
     },
   },
 };

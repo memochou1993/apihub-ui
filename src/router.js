@@ -35,5 +35,10 @@ export default new Router({
       name: 'environments.show',
       component: () => import('@/views/Environment/Show.vue'),
     },
+    {
+      path: '*',
+      name: 404,
+      component: () => import('@/views/Errors/404.vue'),
+    },
   ],
 });
