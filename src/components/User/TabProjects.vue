@@ -133,7 +133,7 @@ export default {
       return this.$route.params;
     },
     projects() {
-      return this.$store.state.projects;
+      return this.$store.state.project.projects;
     },
     isMe() {
       return this.params.user === this.me;

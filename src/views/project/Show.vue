@@ -75,14 +75,14 @@ export default {
     ...mapGetters([
       'me',
     ]),
-    isMe() {
-      return this.params.user === this.me;
-    },
     params() {
       return this.$route.params;
     },
     project() {
-      return this.$store.state.project;
+      return this.$store.state.project.project;
+    },
+    isMe() {
+      return this.params.user === this.me;
     },
   },
   watch: {
