@@ -21,7 +21,12 @@
         <v-btn
           icon
           exact
-          :to="{ name:'users.show', params: { user: 1 } }"
+          @click="goTo({
+            name: 'users.show',
+            params: {
+              user: '1',
+            },
+          })"
         >
           <v-icon>apps</v-icon>
         </v-btn>
@@ -39,6 +44,9 @@
 <script>
 export default {
   methods: {
+    goTo(location) {
+      this.$router.push(location);
+    },
     refresh() {
       //
     },

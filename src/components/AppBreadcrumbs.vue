@@ -7,8 +7,8 @@
         v-slot:item="props"
       >
         <a
+          :class="[props.item.disabled && 'secondary--text']"
           @click="goTo(props.item.location)"
-          :class="[props.item.disabled && 'disabled']"
         >
           {{ props.item.text }}
         </a>
@@ -19,12 +19,6 @@
 
 <script>
 export default {
-  props: {
-    current: {
-      type: String,
-      required: true,
-    },
-  },
   computed: {
     params() {
       return this.$route.params;
@@ -43,7 +37,7 @@ export default {
         },
         {
           text: this.params.project,
-          disabled: false,
+          disabled: true,
           location: {
             name: 'projects.show',
             params: {
@@ -52,10 +46,6 @@ export default {
             },
           },
         },
-        {
-          text: this.current,
-          disabled: true,
-        }
       ];
     },
   },
@@ -66,9 +56,3 @@ export default {
   },
 };
 </script>
-
-<style lang="stylus" scoped>
-  .disabled
-    color: grey
-    pointer-events: none
-</style>

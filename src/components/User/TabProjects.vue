@@ -39,8 +39,8 @@
               class="text-xs-center"
             >
               <v-icon
-                id="private"
                 v-if="props.item.private"
+                id="private"
                 color="primary lighten-1"
               >
                 lock
@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import AppProgress from '@/components/AppProgress.vue';
 import AppNoData from '@/components/AppNoData.vue';
 
@@ -125,11 +126,22 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'me',
+    ]),
     params() {
       return this.$route.params;
     },
     projects() {
       return this.$store.state.projects;
+    },
+    isMe() {
+      return this.params.user === this.me;
+    },
+  },
+  watch: {
+    $route() {
+      this.fetchProjects();
     },
   },
   created() {
@@ -140,8 +152,7 @@ export default {
       this.fetchProjects();
     },
     fetchProjects() {
-      const { auth } = { auth: { check: true } }; // Temp
-      const user = auth.check ? 'me' : this.params.user;
+      const user = this.isMe ? 'me' : this.params.user;
       this.$store.dispatch('fetchProjects', {
         url: `/users/${user}/projects`,
         params: {

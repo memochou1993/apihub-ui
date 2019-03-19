@@ -3,14 +3,14 @@
     class="text-xs-center ma-5"
   >
     <div
-      v-if="error"
+      v-if="loading"
     >
-      No records found.
+      Loading...
     </div>
     <div
       v-else
     >
-      Loading...
+      No records found.
     </div>
   </div>
 </template>
@@ -18,8 +18,8 @@
 <script>
 export default {
   computed: {
-    error() {
-      return this.$store.state.error;
+    loading() {
+      return this.$store.state.loading;
     },
   },
 };

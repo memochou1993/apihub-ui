@@ -29,10 +29,16 @@ export default new Vuex.Store({
       state.projects = projects;
     },
   },
+  getters: {
+    me() {
+      return '1';
+    },
+  },
   actions: {
     fetchProject(context, { url, params }) {
       context.commit('setLoading', true);
       context.commit('setError', null);
+      context.commit('setProject', null);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
@@ -59,6 +65,7 @@ export default new Vuex.Store({
     fetchProjects(context, { url, params }) {
       context.commit('setLoading', true);
       context.commit('setError', null);
+      context.commit('setProjects', []);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',

@@ -4,9 +4,7 @@
       row
       wrap
     >
-      <AppBreadcrumbs
-        current="Overview"
-      />
+      <AppBreadcrumbs />
       <v-flex
         xs12
       >
@@ -38,6 +36,12 @@
               :key="index"
               color="accent lighten-2"
               text-color="secondary darken-4"
+              @click="goTo({
+                name: 'users.show',
+                params: {
+                  user: user.id.toString(),
+                },
+              })"
             >
               <v-avatar>
                 <v-icon
@@ -56,6 +60,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import AppProgress from '@/components/AppProgress.vue';
 import AppNoData from '@/components/AppNoData.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
@@ -67,6 +72,12 @@ export default {
     AppBreadcrumbs,
   },
   computed: {
+    ...mapGetters([
+      'me',
+    ]),
+    isMe() {
+      return this.params.user === this.me;
+    },
     params() {
       return this.$route.params;
     },
@@ -74,13 +85,20 @@ export default {
       return this.$store.state.project;
     },
   },
+  watch: {
+    $route() {
+      this.fetchProject();
+    },
+  },
   created() {
     this.fetchProject();
   },
   methods: {
+    goTo(location) {
+      this.$router.push(location);
+    },
     fetchProject() {
-      const { auth } = { auth: { check: true } }; // Temp
-      const user = auth.check ? 'me' : this.params.user;
+      const user = this.isMe ? 'me' : this.params.user;
       this.$store.dispatch('fetchProject', {
         url: `/users/${user}/projects/${this.params.project}`,
         params: {
