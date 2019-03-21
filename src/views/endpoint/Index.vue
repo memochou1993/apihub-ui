@@ -119,7 +119,7 @@ export default {
           text: 'Detail', value: '', align: 'center', sortable: false,
         },
       ],
-      paginate: 10,
+      paginate: 5,
       page: 1,
       palette: {
         GET: 'blue lighten-2',

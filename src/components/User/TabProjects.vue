@@ -120,7 +120,7 @@ export default {
           text: 'Detail', value: '', align: 'center', sortable: false,
         },
       ],
-      paginate: 10,
+      paginate: 1,
       page: 1,
     };
   },

@@ -12,7 +12,7 @@ export default {
   actions: {
     fetchUser(context, { url, params }) {
       context.dispatch('initialState');
-      context.commit('setUser', null);
+      // context.commit('setUser', null);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',

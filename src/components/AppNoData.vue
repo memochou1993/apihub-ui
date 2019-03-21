@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-xs-center ma-5"
+    class="text-xs-center"
   >
     <div
       v-if="noData"
@@ -12,7 +12,7 @@
     >
       <transition name="fade">
         <AppProgressCircular
-          v-if="show"
+          v-show="show"
         />
       </transition>
     </div>
@@ -48,10 +48,8 @@ export default {
 </script>
 
 <style lang="stylus">
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .25s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+.fade-enter-active, .fade-leave-active
+  transition: opacity .25s
+.fade-enter, .fade-leave-to
+  opacity: 0
 </style>

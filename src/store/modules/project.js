@@ -16,7 +16,7 @@ export default {
   actions: {
     fetchProjects(context, { url, params }) {
       context.dispatch('initialState');
-      context.commit('setProjects', []);
+      // context.commit('setProjects', []);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
@@ -45,7 +45,7 @@ export default {
     },
     fetchProject(context, { url, params }) {
       context.dispatch('initialState');
-      context.commit('setProject', null);
+      // context.commit('setProject', null);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
