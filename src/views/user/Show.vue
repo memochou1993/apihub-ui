@@ -33,7 +33,6 @@
           </v-card-title>
         </v-card>
       </v-flex>
-
       <v-flex
         md9
       >
@@ -77,7 +76,7 @@ export default {
         },
       })
         .catch(() => {
-          this.$router.push({
+          this.$router.replace({
             name: 404,
           });
         });

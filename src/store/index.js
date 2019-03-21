@@ -15,6 +15,8 @@ export default new Vuex.Store({
   state: {
     loading: false,
     error: null,
+    noData: false,
+    pages: 1,
   },
   mutations: {
     setLoading(state, loading) {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     setError(state, error) {
       state.error = error;
     },
+    setNoData(state, noData) {
+      state.noData = noData;
+    },
+    setPages(state, pages) {
+      state.pages = pages;
+    },
   },
   getters: {
     me() {
@@ -30,6 +38,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    //
+    initialState(context) {
+      context.commit('setLoading', true);
+      context.commit('setError', null);
+      context.commit('setNoData', false);
+    },
   },
 });

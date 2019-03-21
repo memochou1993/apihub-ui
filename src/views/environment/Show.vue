@@ -10,7 +10,6 @@
       >
         Environment Show
       </v-flex>
-
       <v-flex
         md9
         xs12

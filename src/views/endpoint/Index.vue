@@ -8,7 +8,7 @@
       <v-flex
         xs12
       >
-        <AppProgress />
+        <AppProgressLinear />
         <v-data-table
           hide-actions
           :items="endpoints"
@@ -70,6 +70,16 @@
             <AppNoData />
           </template>
         </v-data-table>
+        <div
+          class="text-xs-center ma-3"
+        >
+          <v-pagination
+            v-if="pages > 1"
+            v-model="page"
+            :length="pages"
+            @input="onPageChange"
+          />
+        </div>
       </v-flex>
     </v-layout>
   </div>
@@ -77,13 +87,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import AppProgress from '@/components/AppProgress.vue';
+import AppProgressLinear from '@/components/AppProgressLinear.vue';
 import AppNoData from '@/components/AppNoData.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 
 export default {
   components: {
-    AppProgress,
+    AppProgressLinear,
     AppNoData,
     AppBreadcrumbs,
   },
@@ -109,10 +119,20 @@ export default {
           text: 'Detail', value: '', align: 'center', sortable: false,
         },
       ],
-      paginate: 15,
+      paginate: 10,
       page: 1,
-      pages: 1,
+      palette: {
+        GET: 'blue lighten-2',
+        POST: 'green lighten-2',
+        PUT: 'orange lighten-2',
+        PATCH: 'amber lighten-2',
+        DELETE: 'red lighten-2',
+      },
     };
+  },
+  beforeRouteUpdate(to, from, next) {
+    next();
+    this.fetchEndpoints();
   },
   computed: {
     ...mapGetters([
@@ -122,7 +142,10 @@ export default {
       return this.$route.params;
     },
     endpoints() {
-      return this.$store.state.endpoint.endpoints; 
+      return this.$store.state.endpoint.endpoints;
+    },
+    pages() {
+      return this.$store.state.pages;
     },
     isMe() {
       return this.params.user === this.me;
@@ -132,19 +155,11 @@ export default {
     this.fetchEndpoints();
   },
   methods: {
+    onPageChange() {
+      this.fetchEndpoints();
+    },
     colorize(method) {
-      switch (method) {
-        case 'GET':
-          return 'blue lighten-2';
-        case 'POST':
-          return 'green lighten-2';
-        case 'PUT':
-          return 'orange lighten-2';
-        case 'PATCH':
-          return 'amber lighten-2';
-        case 'DELETE':
-          return 'red lighten-2';
-      }
+      return this.palette[method];
     },
     fetchEndpoints() {
       const user = this.isMe ? 'me' : this.params.user;
@@ -157,7 +172,7 @@ export default {
         },
       })
         .catch(() => {
-          this.$router.push({
+          this.$router.replace({
             name: 404,
           });
         });

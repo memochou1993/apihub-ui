@@ -3,7 +3,7 @@
     404
     <div>
       <a
-        @click="$router.go(-2)"
+        @click="$router.go(-1)"
       >
         Go Back
       </a>

@@ -11,8 +11,7 @@ export default {
   },
   actions: {
     fetchUser(context, { url, params }) {
-      context.commit('setLoading', true);
-      context.commit('setError', null);
+      context.dispatch('initialState');
       context.commit('setUser', null);
       return new Promise((resolve, reject) => {
         axios({
@@ -27,6 +26,7 @@ export default {
           .catch((error) => {
             setTimeout(() => {
               context.commit('setError', error);
+              context.commit('setNoData', false);
             }, 500);
             reject(error);
           })

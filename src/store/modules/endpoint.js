@@ -15,8 +15,7 @@ export default {
   },
   actions: {
     fetchEndpoints(context, { url, params }) {
-      context.commit('setLoading', true);
-      context.commit('setError', null);
+      context.dispatch('initialState');
       context.commit('setEndpoints', []);
       return new Promise((resolve, reject) => {
         axios({
@@ -26,11 +25,14 @@ export default {
         })
           .then(({ data }) => {
             context.commit('setEndpoints', data.data);
+            context.commit('setPages', data.meta.last_page);
+            context.commit('setNoData', data.data.length === 0);
             resolve(data);
           })
           .catch((error) => {
             setTimeout(() => {
               context.commit('setError', error);
+              context.commit('setNoData', true);
             }, 500);
             reject(error);
           })
@@ -42,8 +44,7 @@ export default {
       });
     },
     fetchEndpoint(context, { url, params }) {
-      context.commit('setLoading', true);
-      context.commit('setError', null);
+      context.dispatch('initialState');
       context.commit('setEndpoint', null);
       return new Promise((resolve, reject) => {
         axios({
@@ -58,6 +59,7 @@ export default {
           .catch((error) => {
             setTimeout(() => {
               context.commit('setError', error);
+              context.commit('setNoData', true);
             }, 500);
             reject(error);
           })

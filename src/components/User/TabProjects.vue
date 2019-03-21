@@ -5,7 +5,7 @@
       wrap
     >
       <v-flex>
-        <AppProgress />
+        <AppProgressLinear />
         <v-data-table
           hide-actions
           :items="projects"
@@ -90,12 +90,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import AppProgress from '@/components/AppProgress.vue';
+import AppProgressLinear from '@/components/AppProgressLinear.vue';
 import AppNoData from '@/components/AppNoData.vue';
 
 export default {
   components: {
-    AppProgress,
+    AppProgressLinear,
     AppNoData,
   },
   data() {
@@ -120,9 +120,8 @@ export default {
           text: 'Detail', value: '', align: 'center', sortable: false,
         },
       ],
-      paginate: 15,
+      paginate: 10,
       page: 1,
-      pages: 1,
     };
   },
   computed: {
@@ -134,6 +133,9 @@ export default {
     },
     projects() {
       return this.$store.state.project.projects;
+    },
+    pages() {
+      return this.$store.state.pages;
     },
     isMe() {
       return this.params.user === this.me;

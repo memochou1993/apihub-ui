@@ -8,7 +8,7 @@
       <v-flex
         xs12
       >
-        <AppProgress />
+        <AppProgressLinear />
         <v-card
           class="pa-3"
         >
@@ -61,13 +61,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import AppProgress from '@/components/AppProgress.vue';
+import AppProgressLinear from '@/components/AppProgressLinear.vue';
 import AppNoData from '@/components/AppNoData.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
 
 export default {
   components: {
-    AppProgress,
+    AppProgressLinear,
     AppNoData,
     AppBreadcrumbs,
   },
@@ -106,7 +106,7 @@ export default {
         },
       })
         .catch(() => {
-          this.$router.push({
+          this.$router.replace({
             name: 404,
           });
         });

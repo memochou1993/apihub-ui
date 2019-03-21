@@ -16,7 +16,7 @@
       </v-tab>
     </v-tabs>
     <component
-      :is="tab"
+      :is="component"
     />
   </div>
 </template>
@@ -65,27 +65,33 @@ export default {
       ];
     },
     options() {
-      let options = [];
-      this.tabs.forEach(tab => {
+      const options = [];
+      this.tabs.forEach((tab) => {
         options.push(tab.title);
       });
       return options;
     },
-    tab() {
-      let tab = this.$route.query.tab;
-      if (tab) {
-        tab = this.capitalize(tab);
-        if (this.options.includes(tab)) {
-          return `Tab${tab}`;
-        }
-      }
-      this.active = 0;
-      return `Tab${this.options[0]}`;
+    option() {
+      const tab = this.$route.query.tab || '';
+      return `${tab.charAt(0).toUpperCase()}${tab.slice(1)}`;
+    },
+    component() {
+      const tab = this.options.includes(this.option) ? this.option : this.options[0];
+      return `Tab${tab}`;
     },
   },
+  watch: {
+    $route() {
+      this.setActive();
+    },
+  },
+  created() {
+    this.setActive();
+  },
   methods: {
-    capitalize(word) {
-      return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
+    setActive() {
+      const index = this.options.indexOf(this.option);
+      this.active = index === -1 ? 0 : index;
     },
     onTabChange(tab) {
       this.$router.push(tab.to);
