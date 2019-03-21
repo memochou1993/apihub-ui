@@ -21,17 +21,17 @@
               {{ props.item.id }}
             </td>
             <td
-              class="text-xs-left"
+              class="text-xs-right"
             >
               {{ props.item.name }}
             </td>
             <td
-              class="text-xs-left"
+              class="text-xs-right"
             >
               {{ props.item.created_at }}
             </td>
             <td
-              class="text-xs-left"
+              class="text-xs-right"
             >
               {{ props.item.updated_at }}
             </td>
@@ -62,7 +62,7 @@
                 <v-icon
                   color="primary lighten-1"
                 >
-                  dashboard
+                  visibility
                 </v-icon>
               </v-btn>
             </td>
@@ -105,19 +105,19 @@ export default {
           text: 'ID', value: 'id', align: 'center', sortable: false,
         },
         {
-          text: 'Name', value: 'name', align: 'left', sortable: false,
+          text: 'Name', value: 'name', align: 'right', sortable: false,
         },
         {
-          text: 'Created at', value: 'created_at', align: 'left', sortable: false,
+          text: 'Created at', value: 'created_at', align: 'right', sortable: false,
         },
         {
-          text: 'Updated at', value: 'updated_at', align: 'left', sortable: false,
+          text: 'Updated at', value: 'updated_at', align: 'right', sortable: false,
         },
         {
           text: 'Private', value: 'private', align: 'center', sortable: false,
         },
         {
-          text: 'Dashboard', value: '', align: 'center', sortable: false,
+          text: 'Detail', value: '', align: 'center', sortable: false,
         },
       ],
       paginate: 15,
@@ -170,9 +170,6 @@ export default {
           project: id,
         },
       });
-    },
-    editProject(id) {
-      console.log(id);
     },
   },
 };

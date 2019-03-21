@@ -15,16 +15,20 @@
             src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
             :aspect-ratio="16/9"
           />
-          <v-card-title>
-            <div
-              class="headline"
-            >
-              {{ user.name }}
-            </div>
-            <div
-              class="title secondary--text"
-            >
-              {{ user.username }}
+          <v-card-title
+            primary-title
+          >
+            <div>
+              <div
+                class="headline"
+              >
+                {{ user.name }}
+              </div>
+              <div
+                class="title secondary--text"
+              >
+                {{ user.username }}
+              </div>
             </div>
           </v-card-title>
         </v-card>
@@ -54,7 +58,7 @@ export default {
       return this.$store.state.user.user;
     },
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     next();
     if (to.params.user !== from.params.user) {
       this.fetchUser();

@@ -65,9 +65,10 @@ export default {
         {
           title: 'Endpoints',
           to: {
-            name: 'endpoints.show',
+            name: 'endpoints.index',
             params: {
-              endpoint: 1,
+              user: this.params.user,
+              project: this.params.project,
             },
           },
           icon: 'description',

@@ -2,22 +2,22 @@ import axios from 'axios';
 
 export default {
   state: {
-    projects: [],
-    project: null,
+    endpoints: [],
+    endpoint: null,
   },
   mutations: {
-    setProjects(state, projects) {
-      state.projects = projects;
+    setEndpoints(state, endpoints) {
+      state.endpoints = endpoints;
     },
-    setProject(state, project) {
-      state.project = project;
+    setEndpoint(state, endpoint) {
+      state.endpoint = endpoint;
     },
   },
   actions: {
-    fetchProjects(context, { url, params }) {
+    fetchEndpoints(context, { url, params }) {
       context.commit('setLoading', true);
       context.commit('setError', null);
-      context.commit('setProjects', []);
+      context.commit('setEndpoints', []);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
@@ -25,7 +25,7 @@ export default {
           params,
         })
           .then(({ data }) => {
-            context.commit('setProjects', data.data);
+            context.commit('setEndpoints', data.data);
             resolve(data);
           })
           .catch((error) => {
@@ -41,10 +41,10 @@ export default {
           });
       });
     },
-    fetchProject(context, { url, params }) {
+    fetchEndpoint(context, { url, params }) {
       context.commit('setLoading', true);
       context.commit('setError', null);
-      context.commit('setProject', null);
+      context.commit('setEndpoint', null);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
@@ -52,7 +52,7 @@ export default {
           params,
         })
           .then(({ data }) => {
-            context.commit('setProject', data.data);
+            context.commit('setEndpoint', data.data);
             resolve(data);
           })
           .catch((error) => {

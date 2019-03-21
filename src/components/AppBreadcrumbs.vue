@@ -7,7 +7,7 @@
         v-slot:item="props"
       >
         <a
-          :class="[props.item.disabled && 'secondary--text']"
+          :class="[props.item.disabled && 'disabled']"
           @click="goTo(props.item.location)"
         >
           {{ props.item.text }}
@@ -56,3 +56,9 @@ export default {
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+  .disabled
+    color: grey
+    pointer-events: none
+</style>

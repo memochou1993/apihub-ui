@@ -21,14 +21,14 @@ export default new Router({
       component: () => import('@/views/Endpoint/Index.vue'),
     },
     {
-      path: '/:user/:project/endpoints/:endpoint',
-      name: 'endpoints.show',
-      component: () => import('@/views/Endpoint/Show.vue'),
-    },
-    {
       path: '/:user/:project/environments',
       name: 'environments.index',
       component: () => import('@/views/Environment/Index.vue'),
+    },
+    {
+      path: '/:user/:project/endpoints/:endpoint',
+      name: 'endpoints.show',
+      component: () => import('@/views/Endpoint/Show.vue'),
     },
     {
       path: '/:user/:project/environments/:environment',

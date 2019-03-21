@@ -45,7 +45,7 @@
             >
               <v-avatar>
                 <v-icon
-                  color="white"
+                  dark
                 >
                   account_circle
                 </v-icon>
@@ -85,10 +85,9 @@ export default {
       return this.params.user === this.me;
     },
   },
-  watch: {
-    $route() {
-      this.fetchProject();
-    },
+  beforeRouteUpdate(to, from, next) {
+    next();
+    this.fetchProject();
   },
   created() {
     this.fetchProject();
