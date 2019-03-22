@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-xs-center"
+    class="text-xs-center ma-5"
   >
     <div
       v-if="noData"
@@ -11,9 +11,7 @@
       v-else
     >
       <transition name="fade">
-        <AppProgressCircular
-          v-show="show"
-        />
+        <AppProgressCircular />
       </transition>
     </div>
   </div>
@@ -26,23 +24,10 @@ export default {
   components: {
     AppProgressCircular,
   },
-  data() {
-    return {
-      show: false,
-    };
-  },
   computed: {
-    loading() {
-      return this.$store.state.loading;
-    },
     noData() {
       return this.$store.state.noData;
     },
-  },
-  created() {
-    setTimeout(() => {
-      this.show = true;
-    }, 250);
   },
 };
 </script>

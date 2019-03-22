@@ -13,7 +13,7 @@
           class="pa-3"
         >
           <div
-            v-if="!project"
+            v-if="loading"
           >
             <AppNoData />
           </div>
@@ -77,6 +77,9 @@ export default {
     ]),
     params() {
       return this.$route.params;
+    },
+    loading() {
+      return this.$store.state.loading;
     },
     project() {
       return this.$store.state.project.project;

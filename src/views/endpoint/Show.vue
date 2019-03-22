@@ -13,7 +13,7 @@
           class="pa-3"
         >
           <div
-            v-if="!endpoint"
+            v-if="loading"
           >
             <AppNoData />
           </div>
@@ -56,6 +56,9 @@ export default {
     ]),
     params() {
       return this.$route.params;
+    },
+    loading() {
+      return this.$store.state.loading;
     },
     endpoint() {
       return this.$store.state.endpoint.endpoint;

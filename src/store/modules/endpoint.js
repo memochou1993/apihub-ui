@@ -16,7 +16,6 @@ export default {
   actions: {
     fetchEndpoints(context, { url, params }) {
       context.dispatch('initialState');
-      // context.commit('setEndpoints', []);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
@@ -45,7 +44,6 @@ export default {
     },
     fetchEndpoint(context, { url, params }) {
       context.dispatch('initialState');
-      // context.commit('setEndpoint', null);
       return new Promise((resolve, reject) => {
         axios({
           method: 'GET',
