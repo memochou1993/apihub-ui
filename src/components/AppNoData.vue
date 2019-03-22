@@ -10,9 +10,7 @@
     <div
       v-else
     >
-      <transition name="fade">
         <AppProgressCircular />
-      </transition>
     </div>
   </div>
 </template>
@@ -31,10 +29,3 @@ export default {
   },
 };
 </script>
-
-<style lang="stylus">
-.fade-enter-active, .fade-leave-active
-  transition: opacity .25s
-.fade-enter, .fade-leave-to
-  opacity: 0
-</style>

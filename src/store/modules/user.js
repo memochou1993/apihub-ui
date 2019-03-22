@@ -32,7 +32,7 @@ export default {
           .then(() => {
             setTimeout(() => {
               context.commit('setLoading', false);
-            }, 1000);
+            }, 500);
           });
       });
     },
