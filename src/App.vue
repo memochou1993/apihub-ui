@@ -4,7 +4,6 @@
   >
     <v-app>
       <TheToolbar />
-      <TheDrawer />
       <v-content>
         <v-container
           grid-list-xl
@@ -19,14 +18,12 @@
 
 <script>
 import TheToolbar from '@/components/TheToolbar.vue';
-import TheDrawer from '@/components/TheDrawer.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
 export default {
   name: 'App',
   components: {
     TheToolbar,
-    TheDrawer,
     TheFooter,
   },
 };

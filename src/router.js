@@ -16,24 +16,24 @@ export default new Router({
       component: () => import('@/views/Project/Show.vue'),
     },
     {
-      path: '/:user/:project/endpoints',
-      name: 'endpoints.index',
-      component: () => import('@/views/Endpoint/Index.vue'),
-    },
-    {
       path: '/:user/:project/environments',
       name: 'environments.index',
       component: () => import('@/views/Environment/Index.vue'),
     },
     {
-      path: '/:user/:project/endpoints/:endpoint',
-      name: 'endpoints.show',
-      component: () => import('@/views/Endpoint/Show.vue'),
-    },
-    {
       path: '/:user/:project/environments/:environment',
       name: 'environments.show',
       component: () => import('@/views/Environment/Show.vue'),
+    },
+    {
+      path: '/:user/:project/endpoints',
+      name: 'endpoints.index',
+      component: () => import('@/views/Endpoint/Index.vue'),
+    },
+    {
+      path: '/:user/:project/endpoints/:endpoint',
+      name: 'endpoints.show',
+      component: () => import('@/views/Endpoint/Show.vue'),
     },
     {
       path: '*',
