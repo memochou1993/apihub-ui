@@ -43,7 +43,7 @@ export default {
       return [
         {
           title: 'Overview',
-          to: {
+          path: {
             name: 'users.show',
             params: {
               user: this.params.user,
@@ -52,7 +52,7 @@ export default {
         },
         {
           title: 'Projects',
-          to: {
+          path: {
             name: 'users.show',
             params: {
               user: this.params.user,
@@ -94,7 +94,7 @@ export default {
       this.active = index === -1 ? 0 : index;
     },
     onTabChange(tab) {
-      this.$router.push(tab.to);
+      this.$router.push(tab.path);
     },
   },
 };

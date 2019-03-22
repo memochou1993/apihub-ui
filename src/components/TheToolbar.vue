@@ -57,12 +57,15 @@
         >
           <v-list-tile
             :key="index"
-            :to="link.to"
-            active-class="secondary lighten-4 primary--text"
+            :to="link.path"
+            :active-class="activeClass"
+            :class="[active(link.path.name) && activeClass]"
             exact
           >
             <v-list-tile-action>
-              <v-icon>
+              <v-icon
+                :class="[active(link.path.name) && activeClass]"
+              >
                 {{ link.icon }}
               </v-icon>
             </v-list-tile-action>
@@ -89,6 +92,7 @@ export default {
   data() {
     return {
       drawer: true,
+      activeClass: 'secondary lighten-4 primary--text',
     };
   },
   computed: {
@@ -99,7 +103,7 @@ export default {
       return [
         {
           title: 'Overview',
-          to: {
+          path: {
             name: 'projects.show',
             params: {
               user: this.params.user,
@@ -110,7 +114,7 @@ export default {
         },
         {
           title: 'Endpoints',
-          to: {
+          path: {
             name: 'endpoints.index',
             params: {
               user: this.params.user,
@@ -123,6 +127,9 @@ export default {
     },
   },
   methods: {
+    active(path) {
+      return path.split('.')[0] === this.$route.name.split('.')[0];
+    },
     goTo(location) {
       this.$router.push(location);
     },
