@@ -29,11 +29,14 @@
                 class="headline"
               >
                 <v-chip
+                  v-for="(method, index) in endpoint.method.split(',')"
+                  :key="index"
+                  :color="colorizeMethod(method)"
                   dark
+                  small
                   outline
-                  :color="colorizeMethod(endpoint.method)"
                 >
-                  {{ endpoint.method }}
+                  {{ method }}
                 </v-chip>
                 {{ endpoint.uri }}
               </div>

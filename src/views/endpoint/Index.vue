@@ -36,12 +36,14 @@
                 class="text-xs-left"
               >
                 <v-chip
+                  v-for="(method, index) in props.item.method.split(',')"
+                  :key="index"
+                  :color="colorizeMethod(method)"
                   dark
                   small
                   outline
-                  :color="colorizeMethod(props.item.method)"
                 >
-                  {{ props.item.method }}
+                  {{ method }}
                 </v-chip>
               </td>
               <td

@@ -10,9 +10,9 @@
         <AppProgressLinear />
         <v-card>
           <v-data-table
-            hide-actions
             :items="projects"
             :headers="headers"
+            hide-actions
           >
             <template
               v-slot:items="props"
