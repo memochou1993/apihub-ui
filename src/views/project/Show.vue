@@ -71,6 +71,11 @@ export default {
     AppNoData,
     AppBreadcrumbs,
   },
+  data() {
+    return {
+      project: null,
+    };
+  },
   computed: {
     ...mapGetters([
       'me',
@@ -80,9 +85,6 @@ export default {
     },
     loading() {
       return this.$store.state.loading;
-    },
-    project() {
-      return this.$store.state.project.project;
     },
     isMe() {
       return this.params.user === this.me;
@@ -108,6 +110,9 @@ export default {
           with: 'users',
         },
       })
+        .then(({ data }) => {
+          this.project = data;
+        })
         .catch(() => {
           this.$router.replace({
             name: 404,

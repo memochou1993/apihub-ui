@@ -58,13 +58,12 @@
           <v-list-tile
             :key="index"
             :to="link.path"
-            :active-class="activeClass"
-            :class="[active(link.path.name) && activeClass]"
+            :class="[active(link.path.name) && 'secondary lighten-4 primary--text']"
             exact
           >
             <v-list-tile-action>
               <v-icon
-                :class="[active(link.path.name) && activeClass]"
+                :class="[active(link.path.name) && 'primary--text']"
               >
                 {{ link.icon }}
               </v-icon>
@@ -92,7 +91,6 @@ export default {
   data() {
     return {
       drawer: true,
-      activeClass: 'secondary lighten-4 primary--text',
     };
   },
   computed: {

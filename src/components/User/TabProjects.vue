@@ -100,6 +100,7 @@ export default {
   },
   data() {
     return {
+      projects: [],
       headers: [
         {
           text: 'ID', value: 'id', align: 'center', sortable: false,
@@ -131,9 +132,6 @@ export default {
     params() {
       return this.$route.params;
     },
-    projects() {
-      return this.$store.state.project.projects;
-    },
     pages() {
       return this.$store.state.pages;
     },
@@ -162,7 +160,10 @@ export default {
           page: this.page,
           diffForHumans: true,
         },
-      });
+      })
+        .then(({ data }) => {
+          this.projects = data;
+        });
     },
     viewProject(id) {
       this.$router.push({

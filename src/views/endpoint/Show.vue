@@ -50,6 +50,11 @@ export default {
     AppNoData,
     AppBreadcrumbs,
   },
+  data() {
+    return {
+      endpoint: null,
+    };
+  },
   computed: {
     ...mapGetters([
       'me',
@@ -59,9 +64,6 @@ export default {
     },
     loading() {
       return this.$store.state.loading;
-    },
-    endpoint() {
-      return this.$store.state.endpoint.endpoint;
     },
     isMe() {
       return this.params.user === this.me;
@@ -86,10 +88,13 @@ export default {
           diffForHumans: true,
         },
       })
+        .then(({ data }) => {
+          this.endpoint = data;
+        })
         .catch(() => {
-          // this.$router.replace({
-          //   name: 404,
-          // });
+          this.$router.replace({
+            name: 404,
+          });
         });
     },
   },

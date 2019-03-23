@@ -99,6 +99,7 @@ export default {
   },
   data() {
     return {
+      endpoints: [],
       headers: [
         {
           text: 'ID', value: 'id', align: 'center', sortable: false,
@@ -141,9 +142,6 @@ export default {
     params() {
       return this.$route.params;
     },
-    endpoints() {
-      return this.$store.state.endpoint.endpoints;
-    },
     pages() {
       return this.$store.state.pages;
     },
@@ -171,6 +169,9 @@ export default {
           diffForHumans: true,
         },
       })
+        .then(({ data }) => {
+          this.endpoints = data;
+        })
         .catch(() => {
           this.$router.replace({
             name: 404,
