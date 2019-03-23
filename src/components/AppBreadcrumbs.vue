@@ -2,6 +2,7 @@
   <div>
     <v-breadcrumbs
       :items="breadcrumbs"
+      class="py-0"
     >
       <template
         v-slot:item="props"

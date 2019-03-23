@@ -4,72 +4,83 @@
       row
       wrap
     >
-      <AppBreadcrumbs />
+      <v-flex
+        xs12
+      >
+        <AppBreadcrumbs />
+      </v-flex>
       <v-flex
         xs12
       >
         <AppProgressLinear />
-        <v-data-table
-          hide-actions
-          :items="endpoints"
-          :headers="headers"
-          class="elevation-3"
-        >
-          <template
-            v-slot:items="props"
+        <v-card>
+          <v-data-table
+            hide-actions
+            :items="endpoints"
+            :headers="headers"
           >
-            <td
-              class="text-xs-center"
+            <template
+              v-slot:items="props"
             >
-              {{ props.item.id }}
-            </td>
-            <td
-              class="text-xs-right"
-            >
-              <v-chip
-                dark
-                small
-                :color="colorize(props.item.method)"
+              <td
+                class="text-xs-center"
               >
-                {{ props.item.method }}
-              </v-chip>
-            </td>
-            <td
-              class="text-xs-right"
-            >
-              {{ props.item.name }}
-            </td>
-            <td
-              class="text-xs-right"
-            >
-              {{ props.item.created_at }}
-            </td>
-            <td
-              class="text-xs-right"
-            >
-              {{ props.item.updated_at }}
-            </td>
-            <td
-              class="text-xs-center"
-            >
-              <v-btn
-                icon
-                @click="editEndpoint(props.item.id)"
+                {{ props.item.id }}
+              </td>
+              <td
+                class="text-xs-left"
               >
-                <v-icon
-                  color="primary lighten-1"
+                {{ props.item.name }}
+              </td>
+              <td
+                class="text-xs-left"
+              >
+                <v-chip
+                  dark
+                  small
+                  outline
+                  :color="colorizeMethod(props.item.method)"
                 >
-                  visibility
-                </v-icon>
-              </v-btn>
-            </td>
-          </template>
-          <template
-            v-slot:no-data
-          >
-            <AppNoData />
-          </template>
-        </v-data-table>
+                  {{ props.item.method }}
+                </v-chip>
+              </td>
+              <td
+                class="text-xs-left"
+              >
+                {{ props.item.uri }}
+              </td>
+              <td
+                class="text-xs-right"
+              >
+                {{ props.item.created_at }}
+              </td>
+              <td
+                class="text-xs-right"
+              >
+                {{ props.item.updated_at }}
+              </td>
+              <td
+                class="text-xs-center"
+              >
+                <v-btn
+                  icon
+                  @click="viewEndpoint(props.item.id)"
+                >
+                  <v-icon
+                    color="primary lighten-1"
+                  >
+                    visibility
+                  </v-icon>
+                </v-btn>
+              </td>
+            </template>
+            <template
+              v-slot:no-data
+            >
+              <AppNoData />
+            </template>
+          </v-data-table>
+        </v-card>
         <div
           class="text-xs-center ma-3"
         >
@@ -105,10 +116,13 @@ export default {
           text: 'ID', value: 'id', align: 'center', sortable: false,
         },
         {
-          text: 'Method', value: 'method', align: 'right', sortable: false,
+          text: 'Name', value: 'name', align: 'left', sortable: false,
         },
         {
-          text: 'Name', value: 'name', align: 'right', sortable: false,
+          text: 'Method', value: 'method', align: 'left', sortable: false,
+        },
+        {
+          text: 'URI', value: 'uri', align: 'left', sortable: false,
         },
         {
           text: 'Created at', value: 'created_at', align: 'right', sortable: false,
@@ -120,15 +134,8 @@ export default {
           text: 'Detail', value: '', align: 'center', sortable: false,
         },
       ],
-      paginate: 5,
+      paginate: 10,
       page: 1,
-      palette: {
-        GET: 'blue lighten-2',
-        POST: 'green lighten-2',
-        PUT: 'orange lighten-2',
-        PATCH: 'amber lighten-2',
-        DELETE: 'red lighten-2',
-      },
     };
   },
   beforeRouteUpdate(to, from, next) {
@@ -145,6 +152,9 @@ export default {
     pages() {
       return this.$store.state.pages;
     },
+    methodColors() {
+      return this.$store.state.methodColors;
+    },
     isMe() {
       return this.params.user === this.me;
     },
@@ -156,8 +166,8 @@ export default {
     onPageChange() {
       this.fetchEndpoints();
     },
-    colorize(method) {
-      return this.palette[method];
+    colorizeMethod(method) {
+      return this.methodColors[method];
     },
     fetchEndpoints() {
       const user = this.isMe ? 'me' : this.params.user;
@@ -178,7 +188,7 @@ export default {
           });
         });
     },
-    editEndpoint(id) {
+    viewEndpoint(id) {
       this.$router.push({
         name: 'endpoints.show',
         params: {

@@ -4,7 +4,11 @@
       row
       wrap
     >
-      <AppBreadcrumbs />
+      <v-flex
+        xs12
+      >
+        <AppBreadcrumbs />
+      </v-flex>
       <v-flex
         xs12
       >
@@ -20,12 +24,12 @@
           <div
             v-else
           >
-            <v-card-title
-              primary-title
-              class="headline"
-            >
-              {{ project.name }}
+            <v-card-title>
+              <div class="headline">
+                {{ project.name }}
+              </div>
             </v-card-title>
+            <v-divider />
             <v-card-text
               class="subheading"
             >

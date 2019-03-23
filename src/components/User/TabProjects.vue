@@ -4,75 +4,78 @@
       row
       wrap
     >
-      <v-flex>
+      <v-flex
+        xs12
+      >
         <AppProgressLinear />
-        <v-data-table
-          hide-actions
-          :items="projects"
-          :headers="headers"
-          class="elevation-3"
-        >
-          <template
-            v-slot:items="props"
+        <v-card>
+          <v-data-table
+            hide-actions
+            :items="projects"
+            :headers="headers"
           >
-            <td
-              class="text-xs-center"
+            <template
+              v-slot:items="props"
             >
-              {{ props.item.id }}
-            </td>
-            <td
-              class="text-xs-right"
-            >
-              {{ props.item.name }}
-            </td>
-            <td
-              class="text-xs-right"
-            >
-              {{ props.item.created_at }}
-            </td>
-            <td
-              class="text-xs-right"
-            >
-              {{ props.item.updated_at }}
-            </td>
-            <td
-              class="text-xs-center"
-            >
-              <v-icon
-                v-if="props.item.private"
-                id="private"
-                color="primary lighten-1"
+              <td
+                class="text-xs-center"
               >
-                lock
-              </v-icon>
-              <v-icon
-                v-else
-                color="primary lighten-1"
+                {{ props.item.id }}
+              </td>
+              <td
+                class="text-xs-left"
               >
-                lock_open
-              </v-icon>
-            </td>
-            <td
-              class="text-xs-center"
-            >
-              <v-btn
-                icon
-                @click="viewProject(props.item.id)"
+                {{ props.item.name }}
+              </td>
+              <td
+                class="text-xs-right"
+              >
+                {{ props.item.created_at }}
+              </td>
+              <td
+                class="text-xs-right"
+              >
+                {{ props.item.updated_at }}
+              </td>
+              <td
+                class="text-xs-center"
               >
                 <v-icon
+                  v-if="props.item.private"
+                  id="private"
                   color="primary lighten-1"
                 >
-                  visibility
+                  lock
                 </v-icon>
-              </v-btn>
-            </td>
-          </template>
-          <template
-            v-slot:no-data
-          >
-            <AppNoData />
-          </template>
-        </v-data-table>
+                <v-icon
+                  v-else
+                  color="primary lighten-1"
+                >
+                  lock_open
+                </v-icon>
+              </td>
+              <td
+                class="text-xs-center"
+              >
+                <v-btn
+                  icon
+                  @click="viewProject(props.item.id)"
+                >
+                  <v-icon
+                    color="primary lighten-1"
+                  >
+                    visibility
+                  </v-icon>
+                </v-btn>
+              </td>
+            </template>
+            <template
+              v-slot:no-data
+            >
+              <AppNoData />
+            </template>
+          </v-data-table>
+        </v-card>
         <div
           class="text-xs-center ma-3"
         >
@@ -106,7 +109,7 @@ export default {
           text: 'ID', value: 'id', align: 'center', sortable: false,
         },
         {
-          text: 'Name', value: 'name', align: 'right', sortable: false,
+          text: 'Name', value: 'name', align: 'left', sortable: false,
         },
         {
           text: 'Created at', value: 'created_at', align: 'right', sortable: false,
@@ -121,7 +124,7 @@ export default {
           text: 'Detail', value: '', align: 'center', sortable: false,
         },
       ],
-      paginate: 1,
+      paginate: 10,
       page: 1,
     };
   },

@@ -17,6 +17,13 @@ export default new Vuex.Store({
     error: null,
     noData: false,
     pages: 1,
+    methodColors: {
+      GET: 'blue',
+      POST: 'green',
+      PUT: 'orange',
+      PATCH: 'amber',
+      DELETE: 'red',
+    },
   },
   mutations: {
     setLoading(state, loading) {

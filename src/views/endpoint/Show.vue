@@ -4,7 +4,11 @@
       row
       wrap
     >
-      <AppBreadcrumbs />
+      <v-flex
+        xs12
+      >
+        <AppBreadcrumbs />
+      </v-flex>
       <v-flex
         xs12
       >
@@ -20,12 +24,21 @@
           <div
             v-else
           >
-            <v-card-title
-              primary-title
-              class="headline"
-            >
-              {{ endpoint.name }}
+            <v-card-title>
+              <div
+                class="headline"
+              >
+                <v-chip
+                  dark
+                  outline
+                  :color="colorizeMethod(endpoint.method)"
+                >
+                  {{ endpoint.method }}
+                </v-chip>
+                {{ endpoint.uri }}
+              </div>
             </v-card-title>
+            <v-divider />
             <v-card-text
               class="subheading"
             >
@@ -65,6 +78,9 @@ export default {
     loading() {
       return this.$store.state.loading;
     },
+    methodColors() {
+      return this.$store.state.methodColors;
+    },
     isMe() {
       return this.params.user === this.me;
     },
@@ -79,6 +95,9 @@ export default {
   methods: {
     goTo(location) {
       this.$router.push(location);
+    },
+    colorizeMethod(method) {
+      return this.methodColors[method];
     },
     fetchEndpoint() {
       const user = this.isMe ? 'me' : this.params.user;
