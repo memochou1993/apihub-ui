@@ -10,14 +10,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   computed: {
-    loading() {
-      return this.$store.state.loading;
-    },
-    error() {
-      return this.$store.state.error;
-    },
+    ...mapState([
+      'loading',
+      'error',
+    ]),
     color() {
       return this.error ? 'error' : 'success';
     },

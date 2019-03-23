@@ -36,7 +36,7 @@
         </v-btn>
         <v-btn
           icon
-          @click="refresh()"
+          @click="setRefresh()"
         >
           <v-icon>refresh</v-icon>
         </v-btn>
@@ -131,8 +131,8 @@ export default {
     goTo(location) {
       this.$router.push(location);
     },
-    refresh() {
-      //
+    setRefresh() {
+      this.$store.dispatch('setRefresh', true);
     },
   },
 };

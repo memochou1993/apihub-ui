@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import AppProgressLinear from '@/components/AppProgressLinear.vue';
 import AppNoData from '@/components/AppNoData.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
@@ -145,20 +145,25 @@ export default {
     this.fetchEndpoints();
   },
   computed: {
+    ...mapState([
+      'refresh',
+      'pages',
+      'methodColors',
+    ]),
     ...mapGetters([
       'me',
     ]),
     params() {
       return this.$route.params;
     },
-    pages() {
-      return this.$store.state.pages;
-    },
-    methodColors() {
-      return this.$store.state.methodColors;
-    },
     isMe() {
       return this.params.user === this.me;
+    },
+  },
+  watch: {
+    refresh() {
+      this.$store.dispatch('setRefresh', false);
+      this.fetchEndpoints();
     },
   },
   created() {

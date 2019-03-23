@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import AppProgressLinear from '@/components/AppProgressLinear.vue';
 import AppNoData from '@/components/AppNoData.vue';
 import AppBreadcrumbs from '@/components/AppBreadcrumbs.vue';
@@ -81,14 +81,15 @@ export default {
     };
   },
   computed: {
+    ...mapState([
+      'loading',
+      'refresh',
+    ]),
     ...mapGetters([
       'me',
     ]),
     params() {
       return this.$route.params;
-    },
-    loading() {
-      return this.$store.state.loading;
     },
     isMe() {
       return this.params.user === this.me;
@@ -97,6 +98,12 @@ export default {
   beforeRouteUpdate(to, from, next) {
     next();
     this.fetchProject();
+  },
+  watch: {
+    refresh() {
+      this.$store.dispatch('setRefresh', false);
+      this.fetchProject();
+    },
   },
   created() {
     this.fetchProject();

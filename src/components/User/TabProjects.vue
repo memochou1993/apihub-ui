@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import AppProgressLinear from '@/components/AppProgressLinear.vue';
 import AppNoData from '@/components/AppNoData.vue';
 
@@ -129,14 +129,15 @@ export default {
     };
   },
   computed: {
+    ...mapState([
+      'refresh',
+      'pages',
+    ]),
     ...mapGetters([
       'me',
     ]),
     params() {
       return this.$route.params;
-    },
-    pages() {
-      return this.$store.state.pages;
     },
     isMe() {
       return this.params.user === this.me;
@@ -144,6 +145,10 @@ export default {
   },
   watch: {
     $route() {
+      this.fetchProjects();
+    },
+    refresh() {
+      this.$store.dispatch('setRefresh', false);
       this.fetchProjects();
     },
   },

@@ -10,12 +10,13 @@
     <div
       v-else
     >
-        <AppProgressCircular />
+      <AppProgressCircular />
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import AppProgressCircular from '@/components/AppProgressCircular.vue';
 
 export default {
@@ -23,9 +24,9 @@ export default {
     AppProgressCircular,
   },
   computed: {
-    noData() {
-      return this.$store.state.noData;
-    },
+    ...mapState([
+      'noData',
+    ]),
   },
 };
 </script>

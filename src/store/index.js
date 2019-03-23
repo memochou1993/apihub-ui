@@ -16,6 +16,7 @@ export default new Vuex.Store({
     loading: false,
     error: null,
     noData: false,
+    refresh: false,
     pages: 1,
     methodColors: {
       GET: 'blue darken-1',
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     setNoData(state, noData) {
       state.noData = noData;
     },
+    setRefresh(state, refresh) {
+      state.refresh = refresh;
+    },
     setPages(state, pages) {
       state.pages = pages;
     },
@@ -50,6 +54,9 @@ export default new Vuex.Store({
       context.commit('setLoading', true);
       context.commit('setError', null);
       context.commit('setNoData', false);
+    },
+    setRefresh(context, refresh) {
+      context.commit('setRefresh', refresh);
     },
   },
 });
