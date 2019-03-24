@@ -1,5 +1,5 @@
 <template>
-    <div>
-        TabOverview
-    </div>
+  <div>
+    TabOverview
+  </div>
 </template>
