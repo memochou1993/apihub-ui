@@ -19,12 +19,12 @@ export default new Vuex.Store({
     refresh: false,
     pages: 1,
     methodColors: {
-      GET: 'blue darken-1',
+      GET: 'purple darken-1',
       POST: 'green darken-1',
       PUT: 'orange darken-1',
       PATCH: 'amber darken-1',
       DELETE: 'red darken-1',
-      HEAD: 'grey darken-1',
+      HEAD: 'blue darken-1',
     },
   },
   mutations: {
