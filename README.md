@@ -1,4 +1,4 @@
-# apihub-client
+# apihub-ui
 
 ## Project setup
 ```
